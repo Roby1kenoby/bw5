@@ -1,0 +1,53 @@
+
+.list-group-item {
+    border: none!important;
+    border-bottom: 1px solid #ddd!important;
+    padding: 1rem; 
+  }
+  
+  
+  .list-group-item {
+    padding: 1rem; 
+  }
+  
+  .list-group-item:first-child {
+    margin-top: 0;
+  }
+  
+  .list-group-item:last-child {
+    margin-bottom: 0;
+  }
+
+  
+  .role {
+    font-weight: bold;
+    font-size: 1rem; 
+    margin-bottom: 0.25rem; 
+  }
+  
+
+  .company {
+    font-size: 0.85rem; 
+    color: #000; 
+    margin-bottom: 0.25rem; 
+  }
+  
+
+  .dates {
+    font-size: 0.85rem; 
+    color: #6c757d; 
+    margin-bottom: 0.25rem; 
+  }
+  
+  .description {
+    font-size: 0.85rem; 
+    color: #000; 
+    margin-bottom: 0.25rem; 
+  }
+  
+ 
+  .area {
+    font-size: 0.85rem; 
+    color: #000; 
+  }
+  
