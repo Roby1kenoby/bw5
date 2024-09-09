@@ -1,0 +1,12 @@
+###
+POST http://localhost:5000/profile
+Content-Type: application/json
+
+{
+    "name": "andrea",
+    "surname": "epicode",
+    "email": "epicodeandrea@gmail.com",
+    "password":"epicode",
+    "role": "manager",
+    "description": "sono di epicode"
+}
