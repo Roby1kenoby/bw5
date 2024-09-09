@@ -31,7 +31,7 @@ const profileSchema = new Schema(
         backgroundImage:{
             type: String
         },
-        expericens: [{
+        experiences: [{
             type: Schema.Types.ObjectId,
             ref: "Experience"
         }],

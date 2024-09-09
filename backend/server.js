@@ -6,7 +6,9 @@ import authorization from './middleware/authorization.js'; */
 import cors from 'cors'
 import express from 'express'
 import 'dotenv/config'
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
+import mongoDbConnection from './db.js'
+import authRouter from './routes/authentication.router.js'
 
 const port = process.env.PORT || 5000
 const host = process.env.HOST || 'http://localhost:5000/'
@@ -17,9 +19,15 @@ server.use(cors())
 server.use(morgan("dev")) 
 server.use(helmet())
 
-await mongoose.connect(process.env.MONGODB_URL)
-    .then(() => console.log('Connessione al database...'))
-    .catch((err) => console.log(err)) 
+// routers
+
+server.use('/auth', authRouter)
+
+mongoDbConnection()
+
+// await mongoose.connect(process.env.MONGODB_URL)
+//     .then(() => console.log('Connessione al database...'))
+//     .catch((err) => console.log(err)) 
 
 server.listen(port, () => {
     console.log(`Server is listening at port ${port} at ${host}`)
