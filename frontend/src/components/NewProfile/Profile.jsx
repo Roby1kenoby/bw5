@@ -6,13 +6,24 @@ import Licenses from '../Licenses/Licenses';
 import Courses from '../Skills/Courses';
 import Interests from '../Skills/Interests';
 import Skills from '../Skills/Skills';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { LoginContext } from '../../contexts/LoginContextProvider';
 
 
 const Profile = () => {
   const { userId } = useParams(); 
+  const {token} = useContext(LoginContext)
+  const navigate = useNavigate()
+
+  const redirectIfNotLoggedIng = function() {
+    if(!token) navigate('/login')
+  }
+
+  useEffect(redirectIfNotLoggedIng,[])
+
   return (
-   
+
     <Row>
       <Col xs={12} md={12}>
       

@@ -1,0 +1,11 @@
+.loginWrapper{
+    display: flex;
+    margin-bottom: 20em;
+    /* align-items: center; */
+}
+
+.loginImageWrapper{
+    width: 250px;
+    height: 150px;
+
+}

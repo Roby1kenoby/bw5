@@ -4,16 +4,18 @@ import { Container, Row, Col } from 'react-bootstrap';
 import MyNavBar from './components/Navbar/MyNavBar';
 import Sidebar from './components/Sidebar/SideBar';
 import { fetchCurrentUser } from './api/api';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './App.css';
 import EditExperiencePage from './components/Experience/EditExperiencePage';
 import MyFooter from './components/Footer/MyFooter';
 import Profile from './components/NewProfile/Profile';
 import NotFound from './components/NotFound';
 import Login from './components/Login/Login';
+import { LoginContext } from './contexts/LoginContextProvider';
 
 function App() {
   const [currentUserId, setCurrentUserId] = useState(null);
+  const {token} = useContext(LoginContext)
 
   useEffect(() => {
     const loadCurrentUser = async () => {
@@ -30,7 +32,7 @@ function App() {
 
   return (
     <Router>
-    <MyNavBar />
+    {token && <MyNavBar />}
 
     <div className="mt-5 pt-3">
       <Container className="" >
@@ -44,9 +46,9 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Col>
-          <Col xs={12} md={3} lg={3} className="mt-4" >
+          {token && <Col xs={12} md={3} lg={3} className="mt-4" >
             <Sidebar currentUserId={currentUserId} />
-          </Col>
+          </Col>}
         </Row>
       </Container>
     </div>

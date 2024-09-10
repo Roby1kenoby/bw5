@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { Me } from "../../data/LoginCRUDs";
+import { Me } from "../api/LoginCRUDs.js";
 export const LoginContext = createContext()
 
 export function LoginContextProvider({ children }) {

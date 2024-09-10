@@ -47,4 +47,10 @@ export const getUserData = async function(req,res){
     return res.send(req.loggedUser);
 }
 
-// TODO callbackGoogle
+export const callbackGoogle = async (req,res) => {
+    //Passport ci crea nella richiesta un oggetto user, a cui noi possiamo poi aggiungere per esempio la proprietà token
+	
+    const token = req.user
+    // effettuo il redirect alla home
+	res.redirect(`${process.env.FRONTEND_URL}/?token=${token}`)
+}
