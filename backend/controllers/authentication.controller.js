@@ -46,3 +46,5 @@ export const getUserData = async function(req,res){
     // e corrispondente alla mail utilizzata per il login
     return res.send(req.loggedUser);
 }
+
+// TODO callbackGoogle

@@ -1,6 +1,6 @@
 const BASE_URL = 'https://striveschool-api.herokuapp.com/api/profile';
 const TOKEN = process.env.REACT_APP_JWT_TOKEN;
-
+console.log(TOKEN)
 const fetchData = async (url, options) => {
   try {
    

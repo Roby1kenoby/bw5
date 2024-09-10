@@ -10,6 +10,7 @@ import EditExperiencePage from './components/Experience/EditExperiencePage';
 import MyFooter from './components/Footer/MyFooter';
 import Profile from './components/NewProfile/Profile';
 import NotFound from './components/NotFound';
+import Login from './components/Login/Login';
 
 function App() {
   const [currentUserId, setCurrentUserId] = useState(null);
@@ -36,6 +37,7 @@ function App() {
         <Row>
           <Col xs={12} md={9} lg={9}>
             <Routes>
+              <Route path="/login" element={<Login/>} />
               <Route path="/" element={<Profile />} />
               <Route path="/profile/:userId" element={<Profile />} />
               <Route path="/edit-experience/:userId" element={<EditExperiencePage />} />

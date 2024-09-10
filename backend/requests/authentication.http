@@ -4,6 +4,6 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "r0by1kenoby@hotmail.it",
-    "password": "password123"
+    "email": "petro@gmail.com",
+    "password": "epicode"
 }
