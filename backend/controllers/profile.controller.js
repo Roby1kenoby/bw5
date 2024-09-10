@@ -69,7 +69,7 @@ export const getAllProfile = async (req, res) => {
 export const editProfile = async (req, res) => {
     const { id } = req.params
     try {
-        const profile = await Profile.findByIdAndUpdate(id, req.body, { new: true }) // trovo il profilo attraverso il proprio id pescato dalla richiesta e modifico i campi secondo il suo corpo
+        const profile = await Profile.findByIdAndUpdate(id, {...req.body, password: await bcrypt.hash(req.body.password, 10)} , { new: true }) // trovo il profilo attraverso il proprio id pescato dalla richiesta e modifico i campi secondo il suo corpo
         await profile.save(); // salvo le modifiche sul DB
         res.send(profile)
     } catch (err) {

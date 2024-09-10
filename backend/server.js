@@ -9,6 +9,8 @@ import 'dotenv/config'
 import mongoDbConnection from './db.js'
 import authRouter from './routes/authentication.router.js'
 import profileRoutes from './routes/profileRoutes.js'
+import experiencesRoutes from './routes/experiencesRoutes.js'
+
 
 const port = process.env.PORT || 5000
 const host = process.env.HOST || 'http://localhost:5000/'
@@ -22,6 +24,7 @@ server.use(helmet())
 // routers
 server.use('/auth', authRouter)
 server.use('/profile', profileRoutes)
+server.use('/experiences', experiencesRoutes)
 
 
 

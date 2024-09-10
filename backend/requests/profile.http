@@ -3,28 +3,28 @@ POST http://localhost:5000/profile
 Content-Type: application/json
 
 {
-    "name": "andrea",
+    "name": "petro",
     "surname": "epicode",
-    "email": "andreaepicode@gmail.com",
+    "email": "petro@gmail.com",
     "password":"epicode",
     "role": "calciatore",
     "description": "sono di epicode"
 }
 
 ###
-GET http://localhost:5000/profile
+GET http://localhost:5000/profile?page=2
 
 ###
-PUT http://localhost:5000/profile/66e00b4fce4698cabc2c9bfa
+PUT http://localhost:5000/profile/66e083a64a38ac97498eb7db
 Content-Type: application/json
 
 {
-    "name": "roberto",
+    "name": "andrea",
     "surname": "epicode",
-    "email": "robertoepicode@gmail.com",
-    "password":"epic",
+    "email": "roberto@gmail.com",
+    "password":"elo",
     "description": "sono di epicode"
 }
 
 ###
-DELETE http://localhost:5000/profile/66e0489806701deebb913d5e
+DELETE http://localhost:5000/profile/66e083a64a38ac97498eb7db
