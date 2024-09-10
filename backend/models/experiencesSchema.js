@@ -12,11 +12,11 @@ const experiencesSchema = new Schema(
         },
         startDate: {
             type: Date,
-            required: true,
+            // required: true,
         },
         endDate:{
             type: Date,
-            required: true
+            // required: true
         },
         area: {
             type: String

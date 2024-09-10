@@ -1,0 +1,12 @@
+###
+POST http://localhost:5000/experiences
+Content-Type: application/json
+
+{
+    "role": "petro",
+    "company": "epicode",
+    "startDate": "",
+    "endDate": "",
+    "area": "calciatore",
+    "description": "sono di epicode"
+}

@@ -34,3 +34,17 @@ export const addExperience = async (req, res) => {
         return res.status(400).send(error)
     }
 }
+
+export const getExperiences = async (req,res)=>{
+    try {
+        const experiences = await Experiences.find({
+            experience: req.params.id,
+        })
+       
+        res.send({
+            dati: experiences,
+        })
+    } catch (error) {
+        res.status(404).send({message: 'Not Found'})
+    }  
+}

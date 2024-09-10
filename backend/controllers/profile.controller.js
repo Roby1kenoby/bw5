@@ -31,7 +31,7 @@ export const registerProfile = async (req, res) => {
         avatar: req.file ? req.file.path : 'https://thumbs.dreamstime.com/z/disegno-vettoriale-immagine-profilo-avatar-vuoto-262683009.jpg?ct=jpeg',
         description: req.body.description,
         backgroundImage: req.file ? req.file.path : 'https://thumbs.dreamstime.com/z/disegno-vettoriale-immagine-profilo-avatar-vuoto-262683009.jpg?ct=jpeg',
-        // come passo experiences =>    experiences: req.body.experiences, 
+        // come passo experiences =>    experiences: req.body.experiences, sicuramente JSON parse per l'oggetto che è dentro l'array
         // serve    googleId,
         verifictedAct: new Date()
     })
@@ -50,7 +50,8 @@ export const getAllProfile = async (req, res) => {
             .collation({ locale: 'it' }) //serve per ignorare maiuscole e minuscole nell'ordine alfabetico del sort
             .sort({ name: 1, surname: 1 })  // ordino gli oggetti JSON in ordine alfabetico secondo il nome e la cognome
             .skip((page - 1) * perPage) // salto documenti pagina precedente 
-            .limit(perPage); // indico gli elementi da mostrare per pagina
+            .limit(perPage) // indico gli elementi da mostrare per pagina
+            // .populate('experiences'); // serve in Me ??
 
         const totalResults = await Profile.countDocuments(); // conta tutti i documenti author nella collection 
         const totalPages = Math.ceil(totalResults / perPage);
