@@ -5,8 +5,26 @@ Content-Type: application/json
 {
     "name": "andrea",
     "surname": "epicode",
-    "email": "epicodeandrea@gmail.com",
+    "email": "andreaepicode@gmail.com",
     "password":"epicode",
-    "role": "manager",
+    "role": "calciatore",
     "description": "sono di epicode"
 }
+
+###
+GET http://localhost:5000/profile
+
+###
+PUT http://localhost:5000/profile/66e00b4fce4698cabc2c9bfa
+Content-Type: application/json
+
+{
+    "name": "roberto",
+    "surname": "epicode",
+    "email": "robertoepicode@gmail.com",
+    "password":"epic",
+    "description": "sono di epicode"
+}
+
+###
+DELETE http://localhost:5000/profile/66e0489806701deebb913d5e
