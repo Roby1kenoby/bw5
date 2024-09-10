@@ -42,7 +42,7 @@ const profileSchema = new Schema(
     }
     ,
     {
-        collection: "linkedin/profiles",
+        collection: "profiles",
         timestamps: true
     }
 )
