@@ -1,5 +1,37 @@
-import Experiences from '../models/experiencesSchema.js'
-import Profile from '../models/profileSchema.js' 
+import Experiences from '../models/experiencesSchema.js';
+// import Profile from '../models/profileSchema.js';
+
+export const getUserExperiences = async (req, res) => {
+    try {
+        const experiences = await Experiences.find({ user: req.params.userId });
+        res.send(experiences);
+    } catch (error) {
+        res.status(404).send({ message: 'Experiences not found' });
+    }
+};
+
+export const getExperiences = async (req, res) => {
+    try {
+        const experiences = await Experiences.find({ user: req.user._id });
+        res.send(experiences);
+    } catch (error) {
+        res.status(404).send({ message: 'Experiences not found' });
+    }
+};
+
+/* export const addExperience = async (req, res) => {
+    const newExperience = new Experiences({
+        ...req.body,
+        user: req.user.id
+    });
+
+    try {
+        const savedExperience = await newExperience.save();
+        res.status(201).send(savedExperience);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+}; */
 
 export const addExperience = async (req, res) => {
     // crea nuova istanza del modello blogpost con i dati definiti nel corpo della richiesta 
@@ -35,16 +67,55 @@ export const addExperience = async (req, res) => {
     }
 }
 
-export const getExperiences = async (req,res)=>{
+export const uploadImageExperience = async (req, res) => {
+    const coverPath = req.file ? req.file.path : null;
+    if (!coverPath) {
+        return res.status(400).send({ message: 'No image uploaded' });
+    }
+
     try {
-        const experiences = await Experiences.find({
-            experience: req.params.id,
-        })
-       
-        res.send({
-            dati: experiences,
-        })
+        const experience = await Experiences.findByIdAndUpdate(
+            req.params.expId,
+            { imageExperience: coverPath },
+            { new: true }
+        );
+        res.send(experience);
     } catch (error) {
-        res.status(404).send({message: 'Not Found'})
-    }  
-}
+        res.status(400).send({ message: 'Error uploading image' });
+    }
+};
+
+export const updateExperience = async (req, res) => {
+    try {
+        const experience = await Experiences.findOneAndUpdate(
+            { _id: req.params.expId, user: req.user._id },
+            req.body,
+            { new: true }
+        );
+
+        if (!experience) {
+            return res.status(404).send({ message: 'Experience not found' });
+        }
+
+        res.send(experience);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+};
+
+export const deleteExperience = async (req, res) => {
+    try {
+        const experience = await Experiences.findOneAndDelete({
+            _id: req.params.expId,
+            user: req.user._id
+        });
+
+        if (!experience) {
+            return res.status(404).send({ message: 'Experience not found' });
+        }
+
+        res.send({ message: 'Experience deleted' });
+    } catch (error) {
+        res.status(400).send({ message: 'Error deleting experience' });
+    }
+};
