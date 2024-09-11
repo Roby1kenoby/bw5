@@ -1,6 +1,6 @@
 // file che contiene tutte le operazioni CRUD usate dall'app per le questioni dell'autore
 const URI = `${process.env.REACT_APP_API_URL}/profile`
-console.log(URI)
+
 // se devo passare dei file, devo avere file come argomento
 export const NewProfile = async (profileData, file1) => {
     try {

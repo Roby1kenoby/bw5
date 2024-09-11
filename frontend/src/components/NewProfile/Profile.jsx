@@ -16,11 +16,12 @@ const Profile = () => {
   const {token} = useContext(LoginContext)
   const navigate = useNavigate()
 
-  const redirectIfNotLoggedIng = function() {
+  const redirectIfNotLoggedIn = function() {
+    console.log(token)
     if(!token) navigate('/login')
   }
 
-  useEffect(redirectIfNotLoggedIng,[])
+  useEffect(redirectIfNotLoggedIn,[token])
 
   return (
 

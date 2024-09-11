@@ -39,10 +39,10 @@ function App() {
         <Row>
           <Col xs={12} md={9} lg={9}>
             <Routes>
-              <Route path="/login" element={<Login/>} />
-              <Route path="/" element={<Profile />} />
-              <Route path="/profile/:userId" element={<Profile />} />
-              <Route path="/edit-experience/:userId" element={<EditExperiencePage />} />
+              {!token && <Route path="/login" element={<Login/>} />}
+              {token && <Route path="/" element={<Profile />} />}
+              {token && <Route path="/profile/:userId" element={<Profile />} />}
+              {token && <Route path="/edit-experience/:userId" element={<EditExperiencePage />} />}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Col>

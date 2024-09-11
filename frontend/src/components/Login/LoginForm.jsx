@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import './LoginForm.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Login, LoginWithGoogle } from "../../api/LoginCRUDs";
 import { LoginContext } from "../../contexts/LoginContextProvider";
 
@@ -10,6 +10,8 @@ import { LoginContext } from "../../contexts/LoginContextProvider";
 function LoginForm({ showForm, setShowForm }) {
     // login Context
     const { loggedUser, setLoggedUser, token, setToken } = useContext(LoginContext)
+
+    const navigate = useNavigate()
 
     // stato per gestire i dati di login
     const [loginFormData, setLoginFormData] = useState({
@@ -32,7 +34,13 @@ function LoginForm({ showForm, setShowForm }) {
     const login = async function () {
         const token = await Login(loginFormData)
         // setto il contesto con il token dell'utente loggato 
-        setToken(token.jwtToken)
+        if(token){
+            setToken(token.jwtToken)
+            navigate('/')
+        }
+        else{
+            alert('Problemi con il login, riprovare più tardi')
+        }
     }
 
     const loginWithGoogle = async function() {
