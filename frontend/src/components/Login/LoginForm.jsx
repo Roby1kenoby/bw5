@@ -69,7 +69,7 @@ function LoginForm({ showForm, setShowForm }) {
                         </Button>
                         <Link variant="secondary" onClick={showRegisterForm}
                             as="Button"
-                            class="registerButton">
+                            className="registerButton">
                             Don't have an account? Register here!
                         </Link>
                     </div>

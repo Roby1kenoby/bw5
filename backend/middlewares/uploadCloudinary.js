@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import multer from 'multer'
 import {v2 as cloudinary} from 'cloudinary'
 import { CloudinaryStorage } from 'multer-storage-cloudinary'
@@ -14,7 +15,6 @@ const storage = new CloudinaryStorage({
       folder: 'epicode',
     },
 });
-   
 const uploadCloudinary = multer({ storage: storage });
 
 export default uploadCloudinary

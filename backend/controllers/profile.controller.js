@@ -16,28 +16,38 @@ import bcrypt from "bcrypt"
 } */
 
 export const registerProfile = async (req, res) => {
-    // verificare che la mail sia già utilizzata
-    const profile = await Profile.findOne({ email: req.body.email })
-    if (profile) {
-        return res.status(500).send('Mail già nel database.')
-    }
-    // se non è utilizzata allora registrare il nuovo utente con la password hashata
-    const newProfile = new Profile({
-        name: req.body.name,
-        surname: req.body.surname,
-        email: req.body.email,
-        password: await bcrypt.hash(req.body.password, 10),
-        role: req.body.role,
-        avatar: req.file ? req.file.path : 'https://thumbs.dreamstime.com/z/disegno-vettoriale-immagine-profilo-avatar-vuoto-262683009.jpg?ct=jpeg',
-        description: req.body.description,
-        backgroundImage: req.file ? req.file.path : 'https://thumbs.dreamstime.com/z/disegno-vettoriale-immagine-profilo-avatar-vuoto-262683009.jpg?ct=jpeg',
-        // come passo experiences =>    experiences: req.body.experiences, sicuramente JSON parse per l'oggetto che è dentro l'array
-        // serve    googleId,
-        verifictedAct: new Date()
-    })
 
-    const createdProfile = await newProfile.save()
-    res.send(createdProfile)
+    try {
+        // verificare che la mail sia già utilizzata
+        console.log('backend')
+        const data = req.body
+        console.log(data)
+        const profile = await Profile.findOne({ email: req.body.email })
+        if (profile) {
+            return res.status(500).send('Mail già nel database.')
+        }
+        // se non è utilizzata allora registrare il nuovo utente con la password hashata
+        const newProfile = new Profile({
+            name: req.body.name,
+            surname: req.body.surname,
+            email: req.body.email,
+            password: await bcrypt.hash(req.body.password, 10),
+            role: req.body.role,
+            avatar: req.file ? req.file.path : 'https://thumbs.dreamstime.com/z/disegno-vettoriale-immagine-profilo-avatar-vuoto-262683009.jpg?ct=jpeg',
+            description: req.body.description,
+            backgroundImage: req.file ? req.file.path : 'https://thumbs.dreamstime.com/z/disegno-vettoriale-immagine-profilo-avatar-vuoto-262683009.jpg?ct=jpeg',
+            // come passo experiences =>    experiences: req.body.experiences, sicuramente JSON parse per l'oggetto che è dentro l'array
+            // serve    googleId,
+            verifictedAct: new Date()
+        })
+
+        const createdProfile = await newProfile.save()
+        res.send(createdProfile)
+    } catch (error) {
+        console.log(error)
+        res.status(400).send(error)
+    }
+    
 }
 
 export const getAllProfile = async (req, res) => {

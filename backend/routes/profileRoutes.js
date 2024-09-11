@@ -4,7 +4,7 @@ import uploadCloudinary from '../middlewares/uploadCloudinary.js';
 
 const profileRoutes = express.Router()
 
-profileRoutes.post('/', registerProfile ) 
+profileRoutes.post('/', uploadCloudinary.single('avatar'), registerProfile ) 
 
 profileRoutes.get('/', getAllProfile )
 

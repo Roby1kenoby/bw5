@@ -3,7 +3,7 @@ import { Button, Container } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import './RegisterForm.css'
-import { NewAuthor } from "../../api/AuthorCRUDs";
+import { NewProfile } from "../../api/ProfileCRUDs";
 
 function RegisterForm({showForm, setShowForm}) {
     // stato per gestire i dati di login
@@ -14,8 +14,8 @@ function RegisterForm({showForm, setShowForm}) {
         password: '',
         role: '',
         avatar: '',
-        description: '',
-        backgroundImage: ''
+        description: ''
+        // backgroundImage: ''
     })
     // stato per il file
     const [registerFormAvatar, setRegisterFormAvatar] = useState()
@@ -37,9 +37,10 @@ function RegisterForm({showForm, setShowForm}) {
     }
 
     // funzione per creare il nuovo utente
-    const createNewAuthor = async function(){
-        const createdAuthor = await NewAuthor(registerFormData, registerFormAvatar)
-        createdAuthor._id ? showLoginForm() : alert('Errore nella creazione dell\'utente')
+    const createNewProfile = async function(){
+        console.log(registerFormData)
+        const createdAuthor = await NewProfile(registerFormData, registerFormAvatar)
+        // createdAuthor._id ? showLoginForm() : alert('Errore nella creazione dell\'utente')
     }
 
 
@@ -112,15 +113,15 @@ function RegisterForm({showForm, setShowForm}) {
                             onChange={handleAvatarChange}
                             />
                     </Form.Group>
-                    <Form.Group className="mb-3">
+                    {/* <Form.Group className="mb-3">
                         <Form.Label>Background Image</Form.Label>
                         <Form.Control type="file"
                             name="backgroundImage"
                             onChange={handleAvatarChange}
                             />
-                    </Form.Group>
+                    </Form.Group> */}
                     <div className="loginButtonGroup">
-                        <Button variant="primary" onClick={createNewAuthor}>
+                        <Button variant="primary" onClick={createNewProfile}>
                             Submit
                         </Button>
                         <Link variant="secondary" onClick={showLoginForm}
