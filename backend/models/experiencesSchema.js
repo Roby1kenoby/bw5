@@ -4,11 +4,11 @@ const experiencesSchema = new Schema(
     {
         role: {
             type: String,
-            required: true
+            // required: true
         },
         company: {
             type: String,
-            required: true
+            // required: true
         },
         startDate: {
             type: Date,

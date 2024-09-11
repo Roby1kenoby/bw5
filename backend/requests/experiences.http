@@ -10,3 +10,7 @@ Content-Type: application/json
     "area": "calciatore",
     "description": "sono di epicode"
 }
+
+###
+
+GET http://localhost:5000/experiences/66e1d958671c6433be133845
