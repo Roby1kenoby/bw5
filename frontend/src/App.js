@@ -28,7 +28,7 @@ function App() {
     };
 
     loadCurrentUser();
-  }, []);
+  }, [token]);
 
   return (
     <Router>

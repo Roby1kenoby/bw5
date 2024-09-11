@@ -44,7 +44,6 @@ const ProfileHeader = ({ userId: propUserId }) => {
     setIsLoading(true);
     try {
       const currentUser = await fetchCurrentUser(token);
-      console.log('token fornito da /me: ' + currentUser._id)
       setCurrentUserId(currentUser._id);
 
       const targetUserId = userId || currentUser._id; 

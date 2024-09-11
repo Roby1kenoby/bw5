@@ -17,12 +17,12 @@ const ProfileList = ({ excludeUserId, currentUser }) => {
   const loadProfiles = async () => {
     try {
       const allProfiles = await fetchProfiles();
-      console.log('Fetched profiles:', allProfiles);
-
-      const filteredProfiles = allProfiles.filter(
+      const dati = allProfiles.dati
+      const filteredProfiles = dati.filter(
         (profile) => profile._id !== excludeUserId
       );
       setProfiles(filteredProfiles);
+
     } catch (err) {
       setError(
         'Qualcosa è andato storto durante il recupero dei profili. Per favore riprova più tardi.'
@@ -41,7 +41,8 @@ const ProfileList = ({ excludeUserId, currentUser }) => {
     return <div className="no-profiles">Non ci sono profili presenti</div>;
   }
 
-  const displayedProfiles = profiles.slice(0, 6);
+  const displayedProfiles = profiles
+  console.log(displayedProfiles)
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
