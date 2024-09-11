@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const ProfileModal = ({ show, onClose, profiles }) => {
   
-  console.log('Profiles in the modal:', profiles);
+  // console.log('Profiles in the modal:', profiles);
 
   return (
     <Modal show={show} onHide={onClose} size="lg">

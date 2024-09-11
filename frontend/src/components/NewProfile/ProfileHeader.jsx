@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Card, Spinner, Alert, Button, Dropdown } from 'react-bootstrap';
 import { FaPlus, FaPencilAlt } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -9,6 +9,7 @@ import EditExperienceModal from '../Modali/EditExperienceModal';
 import { fetchCurrentUser, addExperience, updateExperience, uploadProfileImage, fetchUserProfile } from '../../api/api';
 import './ProfileHeader.css';
 import EditProfileModal from './EditProfileModal';
+import {LoginContext} from '../../contexts/LoginContextProvider'
 
 const ProfileHeader = ({ userId: propUserId }) => {
   const [profile, setProfile] = useState(null);
@@ -37,16 +38,19 @@ const ProfileHeader = ({ userId: propUserId }) => {
   const navigate = useNavigate();
   const { userId: paramsUserId } = useParams(); 
 
+  const {token} = useContext(LoginContext)
+
   const loadUserProfile = async (userId) => {
     setIsLoading(true);
     try {
-      const currentUser = await fetchCurrentUser();
+      const currentUser = await fetchCurrentUser(token);
+      console.log('token fornito da /me: ' + currentUser._id)
       setCurrentUserId(currentUser._id);
 
       const targetUserId = userId || currentUser._id; 
       setIsCurrentUser(targetUserId === currentUser._id);
 
-      const userProfile = await fetchUserProfile(targetUserId);
+      const userProfile = await fetchUserProfile(targetUserId, token);
       setProfile(userProfile);
     } catch (error) {
       console.error('C’è stato un problema nel caricare i dati del profilo:', error);

@@ -15,6 +15,19 @@ import bcrypt from "bcrypt"
     }
 } */
 
+export const getSpecificProfile = async (req,res) => {
+    // recupero l'id dal query string
+    const id = req.params.id
+    console.log(id)
+    try {
+        const foundProfile = await Profile.findById(id)
+        res.status(200).send(foundProfile)
+    } catch (error) {
+        console.log('Profile not found')
+        res.status(404).send('Profile not found')
+    }
+}
+
 export const registerProfile = async (req, res) => {
 
     try {

@@ -17,7 +17,6 @@ const Profile = () => {
   const navigate = useNavigate()
 
   const redirectIfNotLoggedIn = function() {
-    console.log(token)
     if(!token) navigate('/login')
   }
 

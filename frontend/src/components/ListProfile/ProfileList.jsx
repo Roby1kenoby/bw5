@@ -1,36 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
 import './ProfileList.css';
 import { fetchProfiles } from '../../api/api';
 import ProfileModal from '../Modali/ProfileModal';
 import { FaUserPlus } from 'react-icons/fa';
+import { LoginContext } from '../../contexts/LoginContextProvider'
 
 const ProfileList = ({ excludeUserId, currentUser }) => {
   const [profiles, setProfiles] = useState([]);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const {token} = useContext(LoginContext)
 
-  useEffect(() => {
-    const loadProfiles = async () => {
-      try {
-        const allProfiles = await fetchProfiles();
-        console.log('Fetched profiles:', allProfiles);
 
-        const filteredProfiles = allProfiles.filter(
-          (profile) => profile._id !== excludeUserId
-        );
-        setProfiles(filteredProfiles);
-      } catch (err) {
-        setError(
-          'Qualcosa è andato storto durante il recupero dei profili. Per favore riprova più tardi.'
-        );
-        console.error('Errore nel recupero dei profili:', err);
-      }
-    };
+  const loadProfiles = async () => {
+    try {
+      const allProfiles = await fetchProfiles();
+      console.log('Fetched profiles:', allProfiles);
 
-    loadProfiles();
-  }, [excludeUserId]);
+      const filteredProfiles = allProfiles.filter(
+        (profile) => profile._id !== excludeUserId
+      );
+      setProfiles(filteredProfiles);
+    } catch (err) {
+      setError(
+        'Qualcosa è andato storto durante il recupero dei profili. Per favore riprova più tardi.'
+      );
+      console.error('Errore nel recupero dei profili:', err);
+    }
+  };
+
+  useEffect(() => {loadProfiles()}, [excludeUserId, token]);
 
   if (error) {
     return <div className="error-message">{error}</div>;

@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const loadCurrentUser = async () => {
       try {
-        const userData = await fetchCurrentUser();
+        const userData = await fetchCurrentUser(token);
         setCurrentUserId(userData._id);
       } catch (error) {
         console.error('Impossibile recuperare i dati dell\'utente:', error);

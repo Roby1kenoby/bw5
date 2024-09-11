@@ -1,9 +1,9 @@
-const BASE_URL = 'https://striveschool-api.herokuapp.com/api/profile';
+const BASE_URL = process.env.REACT_APP_API_URL
 const TOKEN = process.env.REACT_APP_JWT_TOKEN;
 
 const fetchData = async (url, options) => {
   try {
-   
+
     const response = await fetch(url, options);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -15,24 +15,33 @@ const fetchData = async (url, options) => {
   }
 };
 
-export const fetchCurrentUser = async () => {
-  const url = `${BASE_URL}/me`;
+export const fetchCurrentUser = async (authToken) => {
+  const url = `${BASE_URL}/auth/me`;
   const options = {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Bearer ${authToken}`,
       'Content-Type': 'application/json',
     },
   };
-  return fetchData(url, options);
+
+  try {
+    const resp = await fetch(url, options)
+    const data = await resp.json()
+    console.log(data)
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+  // return fetchData(url, options);
 };
 
-export const fetchUserProfile = async (userId) => {
-  const url = userId ? `${BASE_URL}/${userId}` : `${BASE_URL}/me`;
+export const fetchUserProfile = async (userId, token) => {
+  const url = userId ? `${BASE_URL}/profile/${userId}` : `${BASE_URL}/auth/me`;
   const options = {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
   };
@@ -44,7 +53,7 @@ export const fetchProfiles = async () => {
   const options = {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
+      // Authorization: `Bearer ${TOKEN}`,
       'Content-Type': 'application/json',
     },
   };

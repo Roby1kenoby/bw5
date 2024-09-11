@@ -7,6 +7,7 @@ import FormatDateSafe from '../Format/FormatDateSafe';
 import CalculateDuration from '../Format/CalculateDuration';
 import { useNavigate } from 'react-router-dom';
 import { fetchCurrentUser } from '../../api/api';
+import { LoginContext } from '../../contexts/LoginContextProvider';
 
 const EditExperiencePage = () => {
   const [experiences, setExperiences] = useState([]);
@@ -24,12 +25,12 @@ const EditExperiencePage = () => {
     description: '',
     area: ''
   });
-
+  const {token} = useState(LoginContext)
  
   useEffect(() => {
     const loadCurrentUser = async () => {
       try {
-        const user = await fetchCurrentUser();
+        const user = await fetchCurrentUser(token);
         setCurrentUserId(user._id);
       } catch (err) {
         console.error('Errore nel recuperare l\'utente corrente:', err);
