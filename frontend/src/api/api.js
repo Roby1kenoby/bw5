@@ -28,7 +28,6 @@ export const fetchCurrentUser = async (authToken) => {
   try {
     const resp = await fetch(url, options)
     const data = await resp.json()
-    console.log(data)
     return data
   } catch (error) {
     console.log(error)
@@ -49,7 +48,7 @@ export const fetchUserProfile = async (userId, token) => {
 };
 
 export const fetchProfiles = async () => {
-  const url = BASE_URL;
+  const url = `${BASE_URL}/profile`;
   const options = {
     method: 'GET',
     headers: {
