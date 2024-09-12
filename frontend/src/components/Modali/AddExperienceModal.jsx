@@ -35,10 +35,10 @@ const AddExperienceModal = ({ show, onClose, onSubmit, experience = {}, onInputC
     startDate: '',
     endDate: '',
     description: '',
-    area: '',
-    employmentType: '',
+    area: ''
+/*     employmentType: '',
     locationType: '',
-    currentRole: false
+    currentRole: false */
   };
 
   const completeExperience = { ...defaultExperience, ...experience };

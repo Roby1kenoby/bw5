@@ -23,13 +23,13 @@ export default (req, res, next) => {
             if(error) return res.status(500).send('Server error: ' + error)
             
             // cerco il profilo corrispondente all'id memorizzato nel token e recupero i dati (tranne la pass)
-            const profile = await Profiles.findById(payload.userId).select('-password')
+            const profile = await Profiles.findById(payload.userId).select('-password').populate('experiences')
             // se non trovo l'autore, errore
             if(!profile) return res.status(400).send('Unauthorized access')
             
             // aggiungo alla richiesta l'utente individuato
             req.loggedUser = profile
-
+ 
             // passo allo step successivo
             next()
         }

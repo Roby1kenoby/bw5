@@ -49,7 +49,7 @@ export const registerProfile = async (req, res) => {
             avatar: req.file ? req.file.path : 'https://thumbs.dreamstime.com/z/disegno-vettoriale-immagine-profilo-avatar-vuoto-262683009.jpg?ct=jpeg',
             description: req.body.description,
             backgroundImage: req.file ? req.file.path : 'https://thumbs.dreamstime.com/z/disegno-vettoriale-immagine-profilo-avatar-vuoto-262683009.jpg?ct=jpeg',
-            // come passo experiences =>    experiences: req.body.experiences, sicuramente JSON parse per l'oggetto che è dentro l'array
+            experiences: [],
             // serve    googleId,
             verifictedAct: new Date()
         })

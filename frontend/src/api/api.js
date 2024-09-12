@@ -59,12 +59,12 @@ export const fetchProfiles = async () => {
   return fetchData(url, options);
 };
 
-export const addExperience = async (userId, experience) => {
-  const url = `${BASE_URL}/${userId}/experiences`;
+export const addExperience = async (token, experience) => {
+  const url = `${BASE_URL}/experiences`;
   const options = {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(experience),
@@ -96,12 +96,12 @@ export const deleteExperience = async (userId, experienceId) => {
   };
   return fetchData(url, options);
 };
-export const fetchExperiences = async (userId) => {
-  const url = `${BASE_URL}/${userId}/experiences`;
+export const fetchExperiences = async (token) => {
+  const url = `${BASE_URL}/experiences/me/experiences`;
   const options = {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${TOKEN}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
   };
