@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ListGroup } from 'react-bootstrap';
 import CalculateDuration from '../Format/CalculateDuration';
 import AddExperienceModal from '../Modali/AddExperienceModal';
 import formatDateSafe from '../Format/FormatDateSafe';
 import './Experience.css';
+import { LoginContext } from '../../contexts/LoginContextProvider';
 const Experience = ({ userId, isCurrentUser }) => {
   const [experiences, setExperiences] = useState([]);
   const [showAddExperienceModal, setShowAddExperienceModal] = useState(false);
@@ -17,11 +18,12 @@ const Experience = ({ userId, isCurrentUser }) => {
     description: '',
     area: ''
   });
+  const {token} = useContext(LoginContext)
   const [error, setError] = useState(null);
  
   useEffect(() => {
     const fetchExperiences = async () => {
-      const url = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`;
+      const url = `${process.env.REACT_APP_API_URL}/experiences/${userId}/experiences`;
       const token = process.env.REACT_APP_JWT_TOKEN;
 
       try {
@@ -44,8 +46,8 @@ const Experience = ({ userId, isCurrentUser }) => {
         console.error('Errore nel recupero delle esperienze:', error);
       }
     };
-
-    fetchExperiences();
+    console.log(token)
+    fetchExperiences(token);
   }, [userId]);
 
 

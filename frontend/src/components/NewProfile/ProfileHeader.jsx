@@ -103,7 +103,7 @@ const ProfileHeader = ({ userId: propUserId }) => {
 
   const submitNewExperience = async () => {
     try {
-      await addExperience(currentUserId, newExperience);
+      await addExperience(token, newExperience);
       setNewExperience({
         role: '',
         company: '',

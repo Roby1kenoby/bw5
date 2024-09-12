@@ -1,22 +1,27 @@
 import Experiences from '../models/experiencesSchema.js';
-// import Profile from '../models/profileSchema.js';
+import Profile from '../models/profileSchema.js';
 
 export const getUserExperiences = async (req, res) => {
-    try {
+/*      try {
         const experiences = await Experiences.find({ user: req.params.userId });
         res.send(experiences);
     } catch (error) {
         res.status(404).send({ message: 'Experiences not found' });
-    }
+    }  */
+    const user = await Profile.findById(req.params.userId).populate('experiences')
+    console.log(user)
+    res.send(user.experiences)
+    
 };
 
 export const getExperiences = async (req, res) => {
-    try {
+/*     try {
         const experiences = await Experiences.find({ user: req.user._id });
         res.send(experiences);
     } catch (error) {
         res.status(404).send({ message: 'Experiences not found' });
-    }
+    } */
+        res.send(req.loggedUser.experiences)
 };
 
 /* export const addExperience = async (req, res) => {
@@ -55,14 +60,19 @@ export const addExperience = async (req, res) => {
     const coverPath = req.file ? req.file.path : null
     const experiences = new Experiences({
         ...req.body,
+        // userId: req.loggedUser.id,
         imageExperience: coverPath // percorso del file caricato
     }); 
+
     let exper
     try {
         exper = await experiences.save() // salva i dati nel DB
+        req.loggedUser.experiences.push(exper)
+        await req.loggedUser.save()
         // mando in risposta il nuovo blogpost salvato 
         res.send(exper) // non eseguo il return per poter mandare la mail e dunque per entrare nel secondo blocco try 
     } catch (error) {
+        console.log(error)
         return res.status(400).send(error)
     }
 }

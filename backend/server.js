@@ -19,12 +19,12 @@ const server = express()
 server.use(express.json())
 server.use(cors()) 
 server.use(morgan("dev")) 
-server.use(helmet())
+/* server.use(helmet()) */
 
 // routers
 server.use('/auth', authRouter)
 server.use('/profile', profileRoutes)
-server.use('/experiences', experiencesRoutes)
+server.use('/experiences', experiencesRoutes) // mettere autenticazione almeno nella POST e in me
 
 
 
