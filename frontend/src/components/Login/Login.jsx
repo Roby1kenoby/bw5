@@ -1,11 +1,21 @@
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import './Login.css'
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import { LoginContext } from "../../contexts/LoginContextProvider";
+import { useNavigate } from "react-router-dom";
 function Login() {
     // stato per gestire la visualizzazione dei form
     const [showForm, setShowForm] = useState(true)
+    const {token} = useContext(LoginContext)
+    const navigate = useNavigate()
+
+    const redirectIfLoggedIn = function() {
+        if(token) navigate('/')
+    }
+    
+    useEffect(redirectIfLoggedIn,[token])
 
     return ( 
         <Row className="loginWrapper">

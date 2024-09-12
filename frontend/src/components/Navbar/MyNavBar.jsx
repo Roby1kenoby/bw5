@@ -2,11 +2,21 @@ import './MyNavBar.css';
 import { FaSearch, FaHome, FaUserFriends, FaBriefcase, FaCommentDots, FaBell, FaUserCircle, FaLinkedin, FaBuilding } from 'react-icons/fa';
 import { Col, Container } from 'react-bootstrap';
 import { Navbar, Nav, Form, FormControl, Dropdown } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { LoginContext } from '../../contexts/LoginContextProvider';
 const MyNavBar = () => {
+  const navigate = useNavigate()
+  const {setToken} = useContext(LoginContext)
+
+  const logout = function(){
+    localStorage.clear()
+    setToken('')
+    navigate('/login')
+  }
   return (
     <Navbar className="navbar" fixed="top">
       <Container className='navbar__container'>
-       
         <div className="navbar__left">
           <Navbar.Brand href="#">
             <FaLinkedin className="navbar__linkedinIcon" />
@@ -57,7 +67,7 @@ const MyNavBar = () => {
               <Dropdown.Menu>
                 <Dropdown.Item href="/">Il tuo profilo</Dropdown.Item>
                 <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             <div className="navbar__divider"></div>

@@ -13,14 +13,23 @@ import { LoginContext } from '../../contexts/LoginContextProvider';
 
 const Profile = () => {
   const { userId } = useParams(); 
-  const {token} = useContext(LoginContext)
+  const {token, setToken} = useContext(LoginContext)
   const navigate = useNavigate()
-
+  const objUrlParams = new URLSearchParams(window.location.search)
+  const urlToken = objUrlParams.get('token')
+  
   const redirectIfNotLoggedIn = function() {
-    if(!token) navigate('/login')
+    if(!token && !urlToken){
+      navigate('/login')
+    } 
+    else{
+      setToken(urlToken)
+    }
   }
 
-  useEffect(redirectIfNotLoggedIn,[token])
+  useEffect(redirectIfNotLoggedIn,[])
+
+  if(!token) return;
 
   return (
 
