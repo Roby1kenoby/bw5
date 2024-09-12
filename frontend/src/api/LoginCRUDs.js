@@ -42,5 +42,5 @@ export const Me = async(token) => {
 
 export const LoginWithGoogle = async function() {
     //redirect alla rotta in cui faccio il login con google, che davanti ha passport 
-    window.location.href=`${URI}/login-google`
+    window.location.href=`${URI}login-google`
 }

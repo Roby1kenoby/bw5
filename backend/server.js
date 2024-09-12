@@ -11,6 +11,8 @@ import authRouter from './routes/authentication.router.js'
 import profileRoutes from './routes/profileRoutes.js'
 import experiencesRoutes from './routes/experiencesRoutes.js'
 
+import passport from 'passport'
+import googleStrategy from './configs/passport.config.js'
 
 const port = process.env.PORT || 5000
 const host = process.env.HOST || 'http://localhost:5000/'
@@ -20,6 +22,8 @@ server.use(express.json())
 server.use(cors()) 
 server.use(morgan("dev")) 
 server.use(helmet())
+
+passport.use(googleStrategy)
 
 // routers
 server.use('/auth', authRouter)
