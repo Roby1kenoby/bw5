@@ -53,16 +53,17 @@ const ProfileHeader = ({ userId: propUserId }) => {
       setProfile(userProfile);
     } catch (error) {
       console.error('C’è stato un problema nel caricare i dati del profilo:', error);
-      setError('Ops! Non siamo riusciti a caricare il tuo profilo. Riprova più tardi.');
+      // setError('Ops! Non siamo riusciti a caricare il tuo profilo. Riprova più tardi.');
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
+    if(!token) return
     const effectiveUserId = propUserId || paramsUserId;
     loadUserProfile(effectiveUserId);
-  }, [propUserId, paramsUserId]);
+  }, [propUserId, paramsUserId, token]);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];

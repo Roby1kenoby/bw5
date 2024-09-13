@@ -18,19 +18,6 @@ const Profile = () => {
   const objUrlParams = new URLSearchParams(window.location.search)
   const urlToken = objUrlParams.get('token')
   
-  const redirectIfNotLoggedIn = function() {
-    if(!token && !urlToken){
-      navigate('/login')
-    } 
-    else{
-      setToken(urlToken)
-    }
-  }
-
-  useEffect(redirectIfNotLoggedIn,[])
-
-  if(!token) return;
-
   return (
 
     <Row>

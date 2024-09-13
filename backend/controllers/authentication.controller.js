@@ -52,5 +52,5 @@ export const callbackGoogle = async (req,res) => {
 	
     const token = req.user
     // effettuo il redirect alla home
-	res.redirect(`${process.env.FRONTEND_URL}/?token=${token}`)
+	res.redirect(`${process.env.FRONTEND_URL}/login?token=${token}`)
 }

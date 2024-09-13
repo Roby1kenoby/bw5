@@ -12,12 +12,15 @@ import Profile from './components/NewProfile/Profile';
 import NotFound from './components/NotFound';
 import Login from './components/Login/Login';
 import { LoginContext } from './contexts/LoginContextProvider';
+import ProtectedRoutes from './routes/ProtectedRoutes';
+import GuestRoutes from './routes/GuestRoutes';
 
 function App() {
   const [currentUserId, setCurrentUserId] = useState(null);
   const {token} = useContext(LoginContext)
 
   useEffect(() => {
+    if(!token) return
     const loadCurrentUser = async () => {
       try {
         const userData = await fetchCurrentUser(token);
@@ -39,10 +42,17 @@ function App() {
         <Row>
           <Col xs={12} md={9} lg={9}>
             <Routes>
-              <Route path="/login" element={<Login/>} />
-              <Route path="/" element={<Profile />} />
-              {token && <Route path="/profile/:userId" element={<Profile />} />}
-              {token && <Route path="/edit-experience/:userId" element={<EditExperiencePage />} />}
+              <Route element={<ProtectedRoutes />}>
+                  <Route path="/" element={<Profile />} />
+                  {/* <Route path="/profile" element={<Profile />} /> */}
+                  <Route path="/profile/:userId" element={<Profile />} />
+                  <Route path="/edit-experience/:userId" element={<EditExperiencePage />} />
+                </Route>
+              
+              <Route element={<GuestRoutes />}>
+                <Route path="/login" element={<Login/>} />
+              </Route>
+              
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Col>

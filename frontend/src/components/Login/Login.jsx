@@ -17,7 +17,7 @@ function Login() {
     
     useEffect(redirectIfLoggedIn,[token])
 
-    return ( 
+return ( 
         <Row className="loginWrapper">
             <Col xs={12} md={12} lg={9}>
                 {showForm && <LoginForm showForm={showForm} setShowForm={setShowForm}/>}
