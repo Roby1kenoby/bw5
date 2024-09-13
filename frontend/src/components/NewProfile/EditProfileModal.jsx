@@ -73,18 +73,19 @@ const EditProfileModal = ({
             </label>
           </div>
           <Form.Group controlId='location'>
-            <Form.Label>Luogo</Form.Label>
+            <Form.Label>Ruolo</Form.Label>
             <Form.Control
               type='text'
-              placeholder='Es: Londra, Berlino'
+              placeholder='Ruolo'
               required
-              value={profileToEdit.area}
+              value={profileToEdit.role}
               onChange={(e) => handleInput('area', e.target.value)}
             />
+            <Form.Label>Descrizione</Form.Label>
             <Form.Control
               type='text'
-              placeholder='CAP'
-              value={profileToEdit.bio}
+              placeholder='Descrizione del ruolo'
+              value={profileToEdit.description}
               onChange={(e) => handleInput('bio', e.target.value)}
             />
           </Form.Group>

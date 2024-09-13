@@ -40,7 +40,7 @@ function RegisterForm({showForm, setShowForm}) {
     const createNewProfile = async function(){
         console.log(registerFormData)
         const createdAuthor = await NewProfile(registerFormData, registerFormAvatar)
-        // createdAuthor._id ? showLoginForm() : alert('Errore nella creazione dell\'utente')
+        // !createdAuthor._id ? showLoginForm() : alert('Errore nella creazione dell\'utente')
     }
 
 

@@ -10,7 +10,6 @@ export function LoginContextProvider({ children }) {
         // recupero l'eventuale token dall'url (ricevuto da un login oauth)
         const objUrlParams = new URLSearchParams(window.location.search)
         const urlToken = objUrlParams.get('token')
-        console.log(urlToken)
         // verifico se è presente un token nel localstorage
         const storageToken = localStorage.getItem('token')
 
